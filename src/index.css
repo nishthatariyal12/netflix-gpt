@@ -1,13 +1,172 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+    font-family: nf-icon;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://assets.nflxext.com/ffe/siteui/fonts/nf-icon-v1-93.eot);
+    src: url(https://assets.nflxext.com/ffe/siteui/fonts/nf-icon-v1-93.eot?#iefix) format("embedded-opentype"),url(https://assets.nflxext.com/ffe/siteui/fonts/nf-icon-v1-93.woff) format("woff"),url(https://assets.nflxext.com/ffe/siteui/fonts/nf-icon-v1-93.ttf) format("truetype"),url(https://assets.nflxext.com/ffe/siteui/fonts/nf-icon-v1-93.svg#nf-icon-v1-93) format("svg")
+}
+[class*=" icon-"],[class^=icon-] {
+    speak: none;
+    font-family: nf-icon;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: none;
+    transform: translateZ(0)
+}
+body, html {
+    background-color: black;
+    top:0;
+    height: 100%;
+}
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-family: sans-serif
+}
+body{
+    margin:0;
+  
+}
+@media only screen and (min-width: 740px){
+.login-body::after {
+   
+    content: "";
+    display: block;
+    height: 236px;
+}
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.hybrid-login-form .hybrid-login-form-help {
+    display: flex
+}
+.hybrid-login-form .login-remember-me {
+    flex-grow: 1;
+    padding-left: 20px
+}
+
+.hybrid-login-form .login-remember-me input[type=checkbox]+label {
+    padding: 0
+}
+
+
+.hybrid-login-form .login-remember-me input[type=checkbox]:active+label::before,.hybrid-login-form .login-remember-me input[type=checkbox]:focus+label::before {
+    background: #e6e6e6;
+    box-shadow: none
+}
+.hybrid-login-form .login-remember-me input[type=checkbox]+label::before {
+    background: #737373;
+    border: 0;
+    border-radius: 2px;
+    height: 16px;
+    left: -20px;
+    width: 16px;
+}
+
+.login-remember-me input[type=checkbox]:checked+label:after {
+    color: #000;
+    font-size: 18px;
+    left: -21px;
+    top: 0
+}
+
+.hybrid-login-form .login-help-link,.hybrid-login-form .login-remember-me-label-text {
+    color: #b3b3b3;
+    font-size: 13px;
+    font-weight: 400
+}
+
+.hybrid-login-form .login-help-link {
+    cursor: pointer;
+    flex: 0 0 1;
+    padding-top: 2px
+}
+
+.hybrid-login-form .hybrid-login-form-other {
+    flex: 0 0 1
+}
+
+.hybrid-login-form .login-form {
+    margin-bottom: 0
+}
+.ui-label{
+    clip: rect(0 0 0 0);
+    border: 0;
+    display: block;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+
+}
+.select-arrow.prefix::before {
+    color: #999;
+    top: 14px;
+    content: "\e896";
+    font-family:'nf-icon';
+    pointer-events: none;
+    position:absolute;
+    left: 15px;
+    font-size: 16px;
+
+
+}
+.ui-select-wrapper:after {
+    color: #000;
+    content: "\e898";
+    font-family: nf-icon;
+    font-size: 6px;
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 17px;
+}
+
+.ui-select-wrapper .select-arrow.medium::after {
+    right: 10px;
+    top: 18px;
+    color: #999;
+}
+.ui-select-wrapper .select-arrow::after {
+    color: #000;
+    content: "\e898";
+    font-family: nf-icon;
+    font-size: 6px;
+    pointer-events: none;
+    position: absolute;
+}
+ .nfTextField:focus {
+    background: #454545;
+}
+.hybrid-login-form .hasText+.placeLabel, .hybrid-login-form .nfTextField:focus+.placeLabel {
+    top: 4px;
+}
+.hybrid-login-form .hasText+.placeLabel,.hybrid-login-form .nfTextField:focus+.placeLabel {
+    top: 7px
+}
+.hasText+.placeLabel,.nfTextField:focus+.placeLabel {
+    font-size: 11px;
+    top: 4px;
+    transform: translateY(0)
+}
+
+.nfTextField:focus+.placeLabel {
+    font-size: 11px;
+    top: 4px;
+    transform: translateY(0);
+}
+ .placeLabel {
+    left: 20px;
+    color: #8c8c8c;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: font .1s ease,top .1s ease,transform .1s ease;
 }
