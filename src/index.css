@@ -117,6 +117,18 @@ body{
 
 
 }
+.login.select-arrow.prefix::before {
+    color: #333;
+    top: 14px;
+    content: "\e896";
+    font-family:'nf-icon';
+    pointer-events: none;
+    position:absolute;
+    left: 15px;
+    font-size: 16px;
+
+
+}
 .ui-select-wrapper:after {
     color: #000;
     content: "\e898";
@@ -156,17 +168,55 @@ body{
     transform: translateY(0)
 }
 
-.nfTextField:focus+.placeLabel {
-    font-size: 11px;
-    top: 4px;
-    transform: translateY(0);
-}
+
  .placeLabel {
-    left: 20px;
-    color: #8c8c8c;
-    font-size: 14px;
-    position: absolute;
-    top: 50%;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 1rem;
     transform: translateY(-50%);
     transition: font .1s ease,top .1s ease,transform .1s ease;
+    position: absolute;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition-duration: 250ms;
+    pointer-events: none;
+    left: 1rem;
+    right: 1rem;
+    top: 1.5rem;
 }
+
+.textField {
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #8c8c8c;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #000;
+    display: block;
+    font-size: 16px;
+    padding: 1.25rem 1rem 0.25rem;
+    width: 100%;
+    min-height: 16px;
+    min-width: 16px;
+}
+
+.textField:focus {
+    border-color: #0071eb;
+    outline: none;
+}
+.textField:focus + .placeLabel,
+.placeLabel.hasText {
+    font-size: 13px;
+    font-weight: 500;
+    top: 6px;
+  transform: translateY(0);
+}
+ .error>.textField, .textField.error {
+    border-color: #b92d2b;
+}
+

@@ -15,7 +15,7 @@ const Login = () => {
       </div>
       <Header signIn={true} />
       <LoginBody/>
-      <LoginFooter/>
+      <LoginFooter signIn={true}/>
     </div>
   );
 };
