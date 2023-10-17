@@ -4,8 +4,13 @@ import LoginFooter from '../components/LoginFooter'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { auth } from '../utils/firebase';
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from "firebase/auth";
+import { adduser } from '../utils/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 const SignUp = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [errorMessage,setErrorMessage]=useState({})
     const onSubmitHandler = (values) => {
         const email=values.email
@@ -27,8 +32,17 @@ const SignUp = () => {
             .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
-                console.log(user)
-                setErrorMessage("")
+                    updateProfile(user, {
+                        displayName: values.fullName,
+                    })
+                        .then(() => {
+                            const { uid, email, displayName } = auth.currentUser;
+                            dispatch(adduser({ uid: uid, email: email, displayName: displayName }))
+                            navigate("/browse")
+                            console.log(user)
+                            setErrorMessage("")
+                        })
+              
                 // ...
             })
             .catch((err) => {
@@ -47,18 +61,14 @@ const SignUp = () => {
       
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            fullName: '',
             email: '',
             password: ''
         },
         validationSchema: Yup.object({
-            firstName: Yup.string()
+            fullName: Yup.string()
                 .max(15, 'Must be 15 characters or less')
-                .required('Firstname is required.'),
-            lastName: Yup.string()
-                .max(20, 'Must be 20 characters or less')
-                .required('Lastname is required'),
+                .required('fullname is required.'),
             email: Yup.string().email('Invalid email address').required('Email is required'),
             password: Yup.string().min(4, 'Password should be at least 4 characters').max(60, 'Password should not exceed 60 characters').required('Password is required'),
 
@@ -161,44 +171,21 @@ const SignUp = () => {
       
                                               <div className=' min-w-0 text-[1rem] font-normal fill-current p-0 w-full items-center gap-[2px] relative text-left z-0 flex'>
                                                   <input
-                                                      className={`textField ${formik.touched.firstName && formik.errors.firstName ? "error" : ""}`}
-                                                      id="firstName"
-                                                      name="firstName"
+                                                      className={`textField ${formik.touched.fullName && formik.errors.fullName ? "error" : ""}`}
+                                                      id="fullName"
+                                                      name="fullName"
                                                       type="text"
                                                       onChange={formik.handleChange}
                                                       onBlur={formik.handleBlur}
-                                                      value={formik.values.firstName}
+                                                      value={formik.values.fullName}
                                                   />
-                                                  <label htmlFor='firstName'
-                                                      className={`placeLabeltext ${formik.values.firstName ? 'hasText' : '' // Add 'hasText' class if there's text in the input
-                                                          }`}> Firstname
+                                                  <label htmlFor='fullName'
+                                                      className={`placeLabeltext ${formik.values.fullName ? 'hasText' : '' // Add 'hasText' class if there's text in the input
+                                                          }`}> fullname
                                                   </label>
                                               </div>
-                                              {formik.touched.firstName && formik.errors.firstName ? (
-                                                  <div className='text-xs text-red-600 fill-current mt-1 w-full'>{formik.errors.firstName}</div>
-                                              ) : null}
-                                          </div>
-                                      </li>
-                                      <li className=' list-none ml-0 mb-[10px]'>
-                                          <div className=' relative inline-flex flex-wrap align-text-top w-full'>
-      
-                                              <div className=' min-w-0 text-[1rem] font-normal fill-current p-0 w-full items-center gap-[2px] relative text-left z-0 flex'>
-                                                  <input
-                                                      className={`textField ${formik.touched.firstName && formik.errors.firstName ? "error" : ""}`}
-                                                      id="lastName"
-                                                      name="lastName"
-                                                      type="text"
-                                                      onChange={formik.handleChange}
-                                                      onBlur={formik.handleBlur}
-                                                      value={formik.values.lastName}
-                                                  />
-                                                  <label htmlFor='lastName'
-                                                      className={`placeLabeltext ${formik.values.lastName ? 'hasText' : '' // Add 'hasText' class if there's text in the input
-                                                          }`}> Lastname
-                                                  </label>
-                                              </div>
-                                              {formik.touched.lastName && formik.errors.lastName ? (
-                                                  <div className='text-xs text-red-600 fill-current mt-1 w-full'>{formik.errors.lastName}</div>
+                                              {formik.touched.fullName && formik.errors.fullName ? (
+                                                  <div className='text-xs text-red-600 fill-current mt-1 w-full'>{formik.errors.fullName}</div>
                                               ) : null}
                                           </div>
                                       </li>

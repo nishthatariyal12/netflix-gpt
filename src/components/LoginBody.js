@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { auth } from '../utils/firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
+
 function LoginBody() {
+    const navigate=useNavigate();
     const[errorMessage,setErrorMessage]=useState("")
     const formik = useFormik({
         initialValues: {
@@ -23,6 +25,8 @@ function LoginBody() {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
+                    setErrorMessage("")
+                    navigate("/browse")
                     // ...
                 })
                 .catch((error) => {

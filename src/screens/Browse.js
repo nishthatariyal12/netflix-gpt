@@ -1,8 +1,9 @@
 import React from 'react'
+import BrowseHeader from '../components/BrowseHeader'
 
 function Browse() {
   return (
-    <div>Browse</div>
+    <BrowseHeader/>
   )
 }
 
