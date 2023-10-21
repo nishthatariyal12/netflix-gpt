@@ -1,7 +1,7 @@
-import React from 'react'
+import {React} from 'react'
 import { Link } from 'react-router-dom'
-
 function LoginFooter({signIn}) {
+  
     return (
         <div className={`${signIn? "bg-[rgba(0,0,0,.75)]  text-[#757575] ": 'bg-[#f3f3f3] text-[#737373]'} mt-0 items-centermin-w-[190px] pb-[20px] relative w-full`}>
             <div></div>

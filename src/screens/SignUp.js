@@ -5,11 +5,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { auth } from '../utils/firebase';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from "firebase/auth";
-import { adduser } from '../utils/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { adduser } from '../slices/userSlice';
 import { useDispatch } from 'react-redux';
 const SignUp = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [errorMessage,setErrorMessage]=useState({})
     const onSubmitHandler = (values) => {
@@ -23,9 +21,11 @@ const SignUp = () => {
                     // ...
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    setErrorMessage(errorMessage)
+                    const errorjson={
+                        code:error.code,
+                        message:error.message
+                    }
+                    setErrorMessage(errorjson)
                 });
         }else{
             createUserWithEmailAndPassword(auth, email, password)
@@ -38,7 +38,7 @@ const SignUp = () => {
                         .then(() => {
                             const { uid, email, displayName } = auth.currentUser;
                             dispatch(adduser({ uid: uid, email: email, displayName: displayName }))
-                            navigate("/browse")
+                          
                             console.log(user)
                             setErrorMessage("")
                         })
