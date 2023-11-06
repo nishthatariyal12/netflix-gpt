@@ -16,12 +16,18 @@ function BillboardContainer() {
     return null; // Handle the case where mainMovie is undefined
   }
 
-  const { title, overview, id } = mainMovie;
+  const { overview, id,backdrop_path } = mainMovie;
 
   return (
-    <div>
-      <VideoBackground movieId={id} />
-      <VideoMetaData title={title} overview={overview} />
+    <div className='block relative z-[1]'>
+    <div className='left-0 relative right-0 top-0 bg-[#000] mb-[20px] pb-[60%] touch-pan-y select-none'>
+     <div className='bg-[#000]  w-full z-0'> 
+      
+      <VideoBackground movieId={id} poster={backdrop_path}/>
+      <VideoMetaData  movieId={id} overview={overview} />
+    
+     </div>
+    </div>
     </div>
   );
 }

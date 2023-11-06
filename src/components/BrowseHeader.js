@@ -62,7 +62,8 @@ const signOutHandler=()=>{
                   </Link>
                   <span className={`caret ${active ? "open" : ""}`} role="presentation"></span>
                 </div>
-               <div className={`sub-menu ${active?" block duration-150 opacity-100 ":""}`}>
+               <div  onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}  className={`sub-menu ${active ? 'block duration-150 opacity-100' : 'hidden'}`} >
                   <div className=' box-border'>
                     <ul className=' block h-auto m-0 p-0 w-full cursor-default'>
                       <li className=' text-[13px] leading-4 py-[5px] px-[10px]'>
